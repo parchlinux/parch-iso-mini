@@ -1,0 +1,9 @@
+                  Welcome to Parch Linux Mini
+
+To install Parch Linux, run: archinstall-rs
+
+For Wi-Fi, authenticate to the wireless network using the iwctl utility.
+For mobile broadband (WWAN) modems, connect with the mmcli utility.
+Ethernet, WLAN and WWAN interfaces using DHCP should work automatically.
+
+After connecting to the internet, the installation can be done with archinstall-rs.
