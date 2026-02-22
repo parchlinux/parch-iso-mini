@@ -29,13 +29,13 @@ jobs:
       - name: Build image
         run: mkarchiso -v iso/
       - name: remove last iso
-        run: sshpass -p "${{ secrets.SSH_PASS }}" ssh -o StrictHostKeyChecking=no root@$HOST rm -rf /srv/http/plasma/
+        run: sshpass -p "${{ secrets.SSH_PASS }}" ssh -o StrictHostKeyChecking=no parch@$HOST rm -rf /srv/http/mini/
       - name: remove last iso
-        run: sshpass -p "${{ secrets.SSH_PASS }}" ssh -o StrictHostKeyChecking=no root@$HOST mkdir /srv/http/plasma/
+        run: sshpass -p "${{ secrets.SSH_PASS }}" ssh -o StrictHostKeyChecking=no parch@$HOST mkdir /srv/http/mini/
       - name: rename iso
-        run: mv "$(ls out/*.iso)" out/Parchlinux-Plasma-beta.iso
+        run: mv "$(ls out/*.iso)" out/Parchlinux-mini-beta.iso
       - name: upload iso to host
-        run: sshpass -p "${{ secrets.SSH_PASS }}" rsync -r "$(ls out/*.iso)" root@mirror.parchlinux.com:/srv/http/plasma/
+        run: sshpass -p "${{ secrets.SSH_PASS }}" rsync -r "$(ls out/*.iso)" parch@mirror.parchlinux.ir:/srv/http/mini/
       - name: Upload iso to the release
         run: |
           cd ./out
@@ -62,13 +62,13 @@ jobs:
       - name: Build image
         run: mkarchiso -v iso/
       - name: remove last iso
-        run: sshpass -p "${{ secrets.SSH_PASS }}" ssh -o StrictHostKeyChecking=no root@$HOST rm -rf /srv/http/plasma/
+        run: sshpass -p "${{ secrets.SSH_PASS }}" ssh -o StrictHostKeyChecking=no parch@$HOST rm -rf /srv/http/mini/
       - name: remove last iso
-        run: sshpass -p "${{ secrets.SSH_PASS }}" ssh -o StrictHostKeyChecking=no root@$HOST mkdir /srv/http/plasma/
+        run: sshpass -p "${{ secrets.SSH_PASS }}" ssh -o StrictHostKeyChecking=no parch@$HOST mkdir /srv/http/mini/
       - name: rename iso
-        run: mv "$(ls out/*.iso)" out/Parchlinux-Plasma-latest.iso
+        run: mv "$(ls out/*.iso)" out/Parchlinux-mini-latest.iso
       - name: upload iso to host
-        run: sshpass -p "${{ secrets.SSH_PASS }}" rsync -r "$(ls out/*.iso)" root@mirror.parchlinux.com:/srv/http/plasma/
+        run: sshpass -p "${{ secrets.SSH_PASS }}" rsync -r "$(ls out/*.iso)" parch@mirror.parchlinux.ir:/srv/http/mini/
       - name: Upload iso to the release
         run: |
           cd ./out
