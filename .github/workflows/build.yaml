@@ -27,9 +27,8 @@ jobs:
         run: mkarchiso -v iso/
       - name: Install netbird client
         run: |
-          VERSION=$(curl -s https://pkgs.netbird.io/releases/latest | grep -o 'v[0-9]\+\.[0-9]\+\.[0-9]\+')
-          curl -LO "https://github.com/netbirdio/netbird/releases/download/${VERSION}/netbird_${VERSION#v}_linux_amd64.tar.gz"
-          tar -xzf netbird_${VERSION#v}_linux_amd64.tar.gz
+          curl -LO https://github.com/netbirdio/netbird/releases/download/v0.74.1/netbird_0.74.1_linux_amd64.tar.gz
+          tar -xzf netbird_0.74.1_linux_amd64.tar.gz
           mv netbird /usr/bin/netbird
           chmod +x /usr/bin/netbird
       - name: Prepare tun device
