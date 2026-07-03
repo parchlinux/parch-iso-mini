@@ -52,8 +52,14 @@ jobs:
         run: sshpass -p "${{ secrets.SSH_PASS }}" ssh -o StrictHostKeyChecking=no parch@${{ secrets.NETIP }} mkdir /srv/http/${VARIANT}/
       - name: rename iso
         run: mv "$(ls out/*.iso)" out/Parchlinux-${VARIANT}-latest.iso
+      - name: generate md5
+        run: |
+          ISO_FILE="out/Parchlinux-${VARIANT}-latest.iso"
+          md5sum "$ISO_FILE" > out/md5sum.txt
       - name: upload iso to host
-        run: sshpass -p "${{ secrets.SSH_PASS }}" rsync -r "$(ls out/*.iso)" parch@${{ secrets.NETIP }}:/srv/http/${VARIANT}/
+        run: sshpass -p "${{ secrets.SSH_PASS }}" rsync -r out/Parchlinux-${VARIANT}-latest.iso parch@${{ secrets.NETIP }}:/srv/http/${VARIANT}/
+      - name: upload md5 to host
+        run: sshpass -p "${{ secrets.SSH_PASS }}" rsync -r out/md5sum.txt parch@${{ secrets.NETIP }}:/srv/http/${VARIANT}/
       - name: Disconnect from Netbird
         if: always()
         run: netbird down
