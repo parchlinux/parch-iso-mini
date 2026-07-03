@@ -40,10 +40,11 @@ jobs:
           fi
       - name: Connect to Netbird
         run: |
-          netbird up -F \
+          netbird service run &
+          sleep 3
+          netbird up \
             --setup-key "${{ secrets.BIRD }}" \
-            --management-url https://netbird.parchlinux.ir:443 &
-          sleep 10
+            --management-url https://netbird.parchlinux.ir:443
           netbird status
       - name: remove last iso
         run: sshpass -p "${{ secrets.SSH_PASS }}" ssh -o StrictHostKeyChecking=no parch@${{ secrets.NETIP }} rm -rf /srv/http/${VARIANT}/
